@@ -32,7 +32,7 @@
                     <div v-if="Addquestion" class="card card-body my-3 question-card">
                         <!-- close btn -->
                         <a href="#" class="close-btn mt-0">
-                            <i @click="Addquestion=false" class="fas fa-window-close"></i>
+                            <i @click="AddQuestion"class="fas fa-window-close"></i>
                         </a>
                         <!-- end of close btn -->
                         <div class="feedback alert w-75 text-capitalize">
@@ -61,15 +61,16 @@
             <div class="row px-2" id="questions-list">
                 <!-- <div class="col-md-4"> -->
                 <!--Template for card data-->
-                <div v-for="notas in notes" :key="notas.id" class="card card-body flashcard my-3">
+                <div v-for="notas in notes" :key="notas.id" :class="[notas.NoteEditedAsk ? 'answer' :'showItem']" class="card card-body flashcard my-3">
                     <h4 class="text-capitalize">{{notas.question}}</h4>
                     <details>
                         <summary><a href="#" class="text-capitalize my-3 show-answer">show/hide answer</a></summary>
                         <h5 class="mb-3">{{notas.answer}}</h5>
 
                     </details>
+
                     <div class="flashcard-btn d-flex justify-content-between">
-                        <a @click="EditNote(notas)" href="#" id="edit-flashcard"
+                        <a @click="FocusNote(notas)" href="#" id="edit-flashcard"
                             class=" btn my-1 edit-flashcard text-uppercase" data-id="">edit</a>
                         <a @click="DeleteNote(notas)" href="#" id="delete-flashcard"
                             class=" btn my-1 delete-flashcard text-uppercase">delete</a>

@@ -19,7 +19,8 @@ Vue.createApp({
             Questions: "",
             Answers: "",
             id: 0,
-            // EditedNote: false,
+            NoteEditedAsk: false,
+            MainNote: {},
         }
 
     },
@@ -30,7 +31,8 @@ Vue.createApp({
 
         },
         AddQuestion() {
-            this.Addquestion = true;
+            this.Addquestion = !this.Addquestion;
+            console.log("Soy el botón de cierre " + this.Addquestion)
         },
 
         AddNote() {
@@ -48,15 +50,27 @@ Vue.createApp({
             console.log(this.notes)
 
         },
-        EditNote(note) {
+        FocusNote(note){
             let editedNote = this.notes.find((n) => n.id == note.id)
-            this.EditedNote = true;
+            let editedFocus = note.NoteEditedAsk;
+            this.MainNote = editedNote;
+            editedFocus = true;
+            this.EditNote();
+            
+        }, 
+        EditNote() {
             this.AddQuestion();
-            this.Questions = editedNote.question;
-            this.Answers = editedNote.answer;
-            this.DeleteNote(editedNote)
-
-
+            this.Questions = this.MainNote.question;
+            this.Answers = this.MainNote.answer;
+            if(this.AddNote){
+                console.log("entro")
+                this.DeleteNote(this.MainNote)
+            }
+           
         }
     }
 }).mount('#app')
+
+
+// :class="{answer : NoteEditedAsk}"
+// {{ movie == 1 ? 'Jaydeep' : 'pakainfo.com' }}
